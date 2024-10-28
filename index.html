@@ -12,20 +12,34 @@
     <link rel="icon" href="./images/moon_icon.ico">
     <title>Moon Programming Language</title>
     <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0d0d0d;
+                --text-color: #f5f5f5;
+                --accent-color: #ffba08;
+            }
+        }
+
+        /* Update existing color references to use variables */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
         body {
             font-family: 'Raleway', sans-serif;
-            background-color: #0d0d0d;
-            color: #f5f5f5;
             overflow-x: hidden;
         }
 
         header {
-            background-color: #1a1a1a;
+            background-color: rgba(26, 26, 26, 0.95); /* Increased opacity */
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px); /* Added blur effect */
         }
 
         nav {
@@ -54,6 +68,28 @@
             height: 100vh;
             background: url('images/moon_bg.jpg') center/cover no-repeat;
             animation: backgroundFade 20s ease-in-out infinite alternate;
+            min-height: 100vh;
+            padding: 2rem;
+            box-sizing: border-box;
+            position: relative;
+            background-attachment: fixed; /* Added parallax */
+        }
+
+        /* Add overlay for better text contrast */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 2;
         }
 
         @keyframes backgroundFade {
@@ -71,10 +107,16 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 5vw, 4rem); /* Responsive font size */
             text-align: center;
             color: #ffba08;
-            animation: glowText 3s ease-in-out infinite alternate;
+            animation: glowText 3s ease-in-out infinite alternate,
+                       floatEffect 6s ease-in-out infinite,
+                       rainbowGlow 8s linear infinite;
+            text-shadow: 0 0 20px rgba(255, 186, 8, 0.8);
+            padding: 0 1rem;
+            margin-bottom: 2rem; /* Adds space below the heading */
+            margin-top: 155px; /* Increased from 105px to 155px */
         }
 
         @keyframes glowText {
@@ -85,6 +127,19 @@
             100% {
                 text-shadow: 0 0 20px #ffba08;
             }
+        }
+
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes rainbowGlow {
+            0% { text-shadow: 0 0 20px rgba(255, 186, 8, 0.8); }
+            25% { text-shadow: 0 0 20px rgba(255, 100, 255, 0.8); }
+            50% { text-shadow: 0 0 20px rgba(100, 200, 255, 0.8); }
+            75% { text-shadow: 0 0 20px rgba(100, 255, 100, 0.8); }
+            100% { text-shadow: 0 0 20px rgba(255, 186, 8, 0.8); }
         }
 
         .audio-button {
@@ -105,8 +160,10 @@
         }
 
         .content {
-            padding: 6rem 2rem;
-            margin-top: 8rem;
+            padding: 4rem 1rem;
+            margin-top: 6rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .intro-section {
@@ -146,16 +203,41 @@
         }
 
         .feature {
-            background-color: #222;
-            padding: 2rem;
-            border-radius: 10px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 1px solid rgba(255, 186, 8, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .feature:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 186, 8, 0.6);
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 186, 8, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
 
         .feature h3 {
@@ -203,6 +285,26 @@
             font-size: 1.2rem;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .cta-section button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .cta-section button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
         }
 
         .cta-section button:hover {
@@ -237,16 +339,460 @@
             font-size: 1rem;
             margin-bottom: 1.5rem;
         }
+
+        /* Added responsive menu styles */
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgba(26, 26, 26, 0.9);
+                padding: 1rem;
+            }
+
+            .menu.active {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu a {
+                margin: 0.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+        }
+
+        /* Added container for better centering */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .audio-container {
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 186, 8, 0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .audio-container.playing {
+            opacity: 0.5;
+        }
+
+        .audio-container:hover {
+            opacity: 1 !important; /* Override playing state when hovered */
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 186, 8, 0.3);
+        }
+
+        .audio-container iframe {
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .audio-label {
+            color: #ffba08;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 186, 8, 0.5);
+        }
+
+        /* Make the audio player more responsive on mobile */
+        @media (max-width: 768px) {
+            .audio-container {
+                max-width: 90%;
+                margin: 1rem auto;
+            }
+        }
+
+        .hamburger {
+            display: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #ffba08;
+            transition: 0.3s all ease;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 9px; }
+        .hamburger span:nth-child(3) { top: 18px; }
+
+        /* Animation for hamburger */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 9px;
+        }
+
+        .cta-section button, .audio-button {
+            background: linear-gradient(45deg, #ffba08, #ffd000);
+            border-radius: 30px;
+            padding: 1rem 2.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(255, 186, 8, 0.3);
+        }
+
+        .cta-section button:hover, .audio-button:hover {
+            background: linear-gradient(45deg, #ffd000, #ffba08);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 186, 8, 0.4);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0d0d0d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        .moon-loader {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ffba08, transparent);
+            animation: moonRotate 2s infinite;
+        }
+
+        @keyframes moonRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Add syntax highlighting container styles */
+        .code-example {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .code-example::before {
+            content: '🌙 Moon';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            color: #ffba08;
+            font-size: 0.9rem;
+        }
+
+        .code-block {
+            font-family: 'Fira Code', monospace;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+
+        /* Update header position since banner is removed */
+        header {
+            top: 0; /* Reset to top of page */
+        }
+
+        /* Remove banner margin adjustment */
+        .hero {
+            margin-top: 0;
+        }
+
+        /* Enhanced code example */
+        .code-example {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-example::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 186, 8, 0.05),
+                transparent
+            );
+            animation: codeScan 3s linear infinite;
+        }
+
+        @keyframes codeScan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Enhanced particle and background effects */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Large nebula clouds with varied sizes */
+                radial-gradient(circle at 15% 25%, rgba(255, 186, 8, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(255, 186, 8, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 45% 65%, rgba(255, 186, 8, 0.06) 0%, transparent 40%),
+                /* Increased number of stars by 1.333x with varied sizes */
+                radial-gradient(1.2px 1.2px at calc(8% + var(--star-x, 0px)) calc(8% + var(--star-y, 0px)), #ffba08 100%, transparent),
+                radial-gradient(2.5px 2.5px at calc(16% + var(--star-x, 0px)) calc(16% + var(--star-y, 0px)), #fff 100%, transparent),
+                radial-gradient(1.8px 1.8px at calc(24% + var(--star-x, 0px)) calc(24% + var(--star-y, 0px)), #ffba08 100%, transparent),
+                radial-gradient(1.4px 1.4px at calc(32% + var(--star-x, 0px)) calc(32% + var(--star-y, 0px)), #fff 100%, transparent),
+                radial-gradient(2.2px 2.2px at calc(40% + var(--star-x, 0px)) calc(40% + var(--star-y, 0px)), #ffba08 100%, transparent),
+                radial-gradient(1.6px 1.6px at calc(48% + var(--star-x, 0px)) calc(48% + var(--star-y, 0px)), #fff 100%, transparent),
+                radial-gradient(1.3px 1.3px at calc(56% + var(--star-x, 0px)) calc(56% + var(--star-y, 0px)), #ffba08 100%, transparent),
+                radial-gradient(2.4px 2.4px at calc(64% + var(--star-x, 0px)) calc(64% + var(--star-y, 0px)), #fff 100%, transparent),
+                radial-gradient(1.9px 1.9px at calc(72% + var(--star-x, 0px)) calc(72% + var(--star-y, 0px)), #ffba08 100%, transparent),
+                radial-gradient(1.5px 1.5px at calc(80% + var(--star-x, 0px)) calc(80% + var(--star-y, 0px)), #fff 100%, transparent),
+                radial-gradient(2.1px 2.1px at calc(88% + var(--star-x, 0px)) calc(88% + var(--star-y, 0px)), #ffba08 100%, transparent),
+                radial-gradient(1.7px 1.7px at calc(96% + var(--star-x, 0px)) calc(96% + var(--star-y, 0px)), #fff 100%, transparent);
+            background-size: 200% 200%;
+            opacity: 0.6;
+            z-index: 1;
+            animation: 
+                starFloat 23s cubic-bezier(0.4, 0, 0.6, 1) infinite,
+                starTwinkle 4.5s ease-in-out infinite alternate;
+            filter: blur(0.5px);
+        }
+
+        /* Enhanced second layer with more varied particles */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(1.1px 1.1px at 12% 12%, rgba(255, 255, 255, 0.9) 100%, transparent),
+                radial-gradient(1.8px 1.8px at 22% 22%, rgba(255, 186, 8, 0.8) 100%, transparent),
+                radial-gradient(1.3px 1.3px at 32% 32%, rgba(255, 255, 255, 0.7) 100%, transparent),
+                radial-gradient(2.0px 2.0px at 42% 42%, rgba(255, 186, 8, 0.9) 100%, transparent),
+                radial-gradient(1.5px 1.5px at 52% 52%, rgba(255, 255, 255, 0.8) 100%, transparent),
+                radial-gradient(1.9px 1.9px at 62% 62%, rgba(255, 186, 8, 0.7) 100%, transparent),
+                radial-gradient(1.4px 1.4px at 72% 72%, rgba(255, 255, 255, 0.9) 100%, transparent),
+                radial-gradient(2.2px 2.2px at 82% 82%, rgba(255, 186, 8, 0.8) 100%, transparent),
+                radial-gradient(1.6px 1.6px at 92% 92%, rgba(255, 255, 255, 0.7) 100%, transparent),
+                radial-gradient(1.7px 1.7px at 15% 85%, rgba(255, 186, 8, 0.9) 100%, transparent),
+                radial-gradient(1.2px 1.2px at 25% 75%, rgba(255, 255, 255, 0.8) 100%, transparent);
+            opacity: 0.4;
+            z-index: 1;
+            animation: 
+                starFloat2 28s cubic-bezier(0.2, 0, 0.8, 1) infinite reverse,
+                starTwinkle2 5.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes starFloat {
+            0% {
+                background-position: 0% 0%;
+                transform: scale(1);
+            }
+            23% {
+                background-position: 45% 30%;
+                transform: scale(1.03);
+            }
+            47% {
+                background-position: 100% 45%;
+                transform: scale(0.98);
+            }
+            71% {
+                background-position: 55% 80%;
+                transform: scale(1.02);
+            }
+            100% {
+                background-position: 0% 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes starFloat2 {
+            0% {
+                background-position: 0% 0%;
+                transform: scale(1.03);
+            }
+            33% {
+                background-position: 70% 30%;
+                transform: scale(0.97);
+            }
+            66% {
+                background-position: 30% 70%;
+                transform: scale(1.02);
+            }
+            100% {
+                background-position: 100% 100%;
+                transform: scale(1.03);
+            }
+        }
+
+        @keyframes starTwinkle {
+            0% { opacity: 0.6; }
+            25% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            75% { opacity: 0.4; }
+            100% { opacity: 0.6; }
+        }
+
+        @keyframes starTwinkle2 {
+            0% { opacity: 0.4; }
+            33% { opacity: 0.2; }
+            66% { opacity: 0.5; }
+            100% { opacity: 0.4; }
+        }
+
+        /* Update hero background color */
+        .hero {
+            background-color: #0d0d0d;
+            /* ... rest of existing hero styles ... */
+        }
+
+        /* Enhanced menu hover effects */
+        .menu a {
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ffba08;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .menu a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        /* Enhanced loading animation */
+        .moon-loader {
+            position: relative;
+        }
+
+        .moon-loader::before {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            background: radial-gradient(circle, rgba(255,186,8,0.2) 0%, transparent 70%);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* 3D transform effects for features */
+        .feature:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Animated gradient border for sections */
+        .content {
+            position: relative;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #ffba08,
+                transparent
+            );
+            animation: borderFlow 3s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
+        }
     </style>
+    <meta property="og:title" content="Moon Programming Language">
+    <meta property="og:description" content="The next generation programming language inspired by Python, built for high-performance computing, AI, and interoperability">
+    <meta property="og:image" content="./images/moon_logo.png">
+    <meta property="og:url" content="[your-website-url]">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" href="images/moon_bg.jpg" as="image">
+    <link rel="preload" href="images/moon_logo.png" as="image">
 </head>
 
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 96px;">
+                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 60px;" aria-label="Moon Logo">
             </div>
-            <div class="menu">
+            <div class="hamburger" aria-label="Menu Toggle" role="button" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu" role="navigation" aria-label="Main navigation">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
@@ -258,13 +804,49 @@
 
     <section class="hero" id="home">
         <h1>Welcome to Moon Programming Language 🌙</h1>
-        <button class="audio-button" onclick="playAudio()">Play "Amethyst Pocket (Part I)"</button>
-        <button class="audio-button" onclick="window.open('https://www.123.gradio.com', '_blank')">Rain (AI Assistant)</button>
+        <div class="audio-container">
+            <div class="audio-label">🎵 Listen to "Amethyst Pocket (Part I)"</div>
+            <iframe width="300" 
+                    height="166" 
+                    scrolling="no" 
+                    frameborder="no" 
+                    allow="autoplay" 
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/amethyst-pocket-part-i-2&color=%23ffba08&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
+            </iframe>
+        </div>
+        <button class="audio-button" onclick="window.open('https://e987d2133014d28cb1.gradio.live', '_blank')">Rain (AI Assistant)</button>
     </section>
 
     <section class="content intro-section" id="about">
         <h2>Why Moon?</h2>
-        <p>Moon is a new, open-source programming language inspired by Python but designed for high-performance computing, AI, and emerging technologies. With Moon, you can seamlessly mix and match resources from different languages, leverage cross-language dependencies, and access blazing-fast compiled execution, making it the perfect language for AI enthusiasts, scientists, and hobbyists alike.</p>
+        <p>Moon is a new, open-source programming language inspired by Python but designed for high-performance computing, AI, and emerging technologies.</p>
+        
+        <div class="code-example">
+            <pre class="code-block">
+<span class="keyword">﷽</span>:
+    <span class="comment"># Python libraries</span>
+    <span class="keyword">from</span> 🕋 <span class="keyword">import</span> pandas as pd
+    <span class="keyword">from</span> 🕋 <span class="keyword">import</span> numpy as np
+    <span class="keyword">from</span> 🕋 <span class="keyword">import</span> tensorflow as tf
+    
+    <span class="comment"># R statistical libraries via rpy2</span>
+    <span class="keyword">from</span> 🕋 <span class="keyword">import</span> rpy2.robjects as ro
+    <span class="keyword">from</span> 🕋 <span class="keyword">import</span> rpy2.robjects.packages as rpackages
+    
+    <span class="comment"># Julia numerical computing via julia</span>
+    <span class="keyword">from</span> 🕋 <span class="keyword">import</span> julia
+    <span class="keyword">from</span> julia <span class="keyword">import</span> Main as jl
+
+    <span class="comment"># Initialize interop components</span>
+    <span class="keyword">def</span> initialize_components():
+        stats = rpackages.importr(<span class="string">'stats'</span>)
+        ggplot2 = rpackages.importr(<span class="string">'ggplot2'</span>)
+        
+        jl.eval(<span class="string">'using DataFrames'</span>)
+        jl.eval(<span class="string">'using Statistics'</span>)
+        
+        <span class="keyword">return</span> stats, ggplot2 ۝</pre>
+        </div>
     </section>
 
     <section class="content features-section" id="features">
@@ -311,6 +893,27 @@
         <p><strong>Ethereum Wallet:</strong> [Ethereum Wallet Address]</p>
     </section>
 
+    <section class="content code-examples" id="examples">
+        <h2>Moon in Action</h2>
+        <div class="code-example">
+            <pre class="code-block">
+<span class="comment"># AI Model Integration Example</span>
+<span class="keyword">﷽</span>
+
+<span class="keyword">import</span> moon.ai as ai
+<span class="keyword">import</span> moon.data as data
+
+<span class="comment"># Moon's unique AI pipeline syntax</span>
+dataset = data.load("example.csv") >> 
+    data.preprocess() >>
+    ai.transform()
+
+model = ai.Model() >>
+    ai.train(dataset) >>
+    ai.optimize()</pre>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2024 Moon Programming Language Foundation | Created with Love by Michael Pisani, and lots of AI! 🌙</p>
     </footer>
@@ -339,10 +942,74 @@
             });
         });
 
-        // Play audio file
-        function playAudio() {
-            const audio = new Audio('./audio/Benevolence_Messiah_-_Amethyst_Pocket_(Part I).flac');
-            audio.play();
-        }
+        // Added mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('.audio-container iframe');
+            const container = document.querySelector('.audio-container');
+            
+            try {
+                const widget = SC.Widget(iframe);
+                
+                widget.bind(SC.Widget.Events.READY, function() {
+                    widget.play();
+                });
+
+                widget.bind(SC.Widget.Events.ERROR, function() {
+                    console.error('SoundCloud player error');
+                    container.innerHTML = '<p>Audio player temporarily unavailable</p>';
+                });
+            } catch (error) {
+                console.error('SoundCloud initialization error:', error);
+                container.innerHTML = '<p>Audio player temporarily unavailable</p>';
+            }
+        });
+    </script>
+
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.querySelector('.loading-overlay');
+            loader.style.opacity = 0;
+            setTimeout(() => loader.style.display = 'none', 500);
+        });
     </script>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
