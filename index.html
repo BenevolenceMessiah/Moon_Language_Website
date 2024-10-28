@@ -71,12 +71,10 @@
             min-height: 100vh;
             padding: 2rem;
             box-sizing: border-box;
-<<<<<<< HEAD
             position: relative;
-            background-attachment: fixed; /* Added parallax */
+            background-attachment: fixed;
         }
 
-        /* Add overlay for better text contrast */
         .hero::before {
             content: '';
             position: absolute;
@@ -91,8 +89,19 @@
         .hero > * {
             position: relative;
             z-index: 2;
-=======
->>>>>>> 463ff7b6c9a6994d049909530966e6c498ab283b
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-align: center;
+            color: #ffba08;
+            animation: glowText 3s ease-in-out infinite alternate,
+                       floatEffect 6s ease-in-out infinite,
+                       rainbowGlow 8s linear infinite;
+            text-shadow: 0 0 20px rgba(255, 186, 8, 0.8);
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+            margin-top: clamp(100px, 20vh, 155px);
         }
 
         @keyframes backgroundFade {
@@ -107,24 +116,6 @@
             100% {
                 filter: brightness(100%);
             }
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 4rem); /* Responsive font size */
-            text-align: center;
-            color: #ffba08;
-<<<<<<< HEAD
-            animation: glowText 3s ease-in-out infinite alternate,
-                       floatEffect 6s ease-in-out infinite,
-                       rainbowGlow 8s linear infinite;
-            text-shadow: 0 0 20px rgba(255, 186, 8, 0.8);
-            padding: 0 1rem;
-            margin-bottom: 2rem; /* Adds space below the heading */
-            margin-top: 155px; /* Increased from 105px to 155px */
-=======
-            animation: glowText 3s ease-in-out infinite alternate;
-            padding: 0 1rem;
->>>>>>> 463ff7b6c9a6994d049909530966e6c498ab283b
         }
 
         @keyframes glowText {
@@ -425,7 +416,6 @@
                 margin: 1rem auto;
             }
         }
-<<<<<<< HEAD
 
         .hamburger {
             display: none;
@@ -780,8 +770,51 @@
             0% { background-position: -100% 0; }
             100% { background-position: 100% 0; }
         }
-=======
->>>>>>> 463ff7b6c9a6994d049909530966e6c498ab283b
+
+        @media (max-width: 768px) {
+            .hero {
+                background-attachment: scroll; /* Fix parallax on mobile */
+            }
+
+            .hero h1 {
+                margin-top: 100px; /* Adjust for mobile header */
+            }
+
+            /* Fix hamburger menu positioning */
+            .hamburger {
+                display: block;
+                position: relative;
+                z-index: 1000;
+            }
+
+            .menu {
+                position: fixed;
+                background: rgba(26, 26, 26, 0.95);
+                backdrop-filter: blur(5px);
+            }
+        }
+
+        /* Add responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                /* Increase padding for better readability on mobile */
+                padding: 0 1.5rem;
+                /* Adjust top margin for mobile */
+                margin-top: clamp(120px, 25vh, 200px);
+                /* Optionally reduce animation effects on mobile for better performance */
+                animation: glowText 3s ease-in-out infinite alternate;
+            }
+        }
+
+        /* Add extra spacing for very narrow screens */
+        @media (max-width: 480px) {
+            .hero h1 {
+                /* Further increase margin for smaller screens */
+                margin-top: clamp(150px, 30vh, 250px);
+                /* Increase padding for better text wrapping */
+                padding: 0 2rem;
+            }
+        }
     </style>
     <meta property="og:title" content="Moon Programming Language">
     <meta property="og:description" content="The next generation programming language inspired by Python, built for high-performance computing, AI, and interoperability">
@@ -796,16 +829,7 @@
     <header>
         <nav>
             <div class="logo">
-<<<<<<< HEAD
-                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 60px;" aria-label="Moon Logo">
-=======
-                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 60px;"> <!-- Reduced logo size -->
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
->>>>>>> 463ff7b6c9a6994d049909530966e6c498ab283b
+                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 60px;">
             </div>
             <div class="hamburger" aria-label="Menu Toggle" role="button" tabindex="0">
                 <span></span>
@@ -834,11 +858,7 @@
                     src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/amethyst-pocket-part-i-2&color=%23ffba08&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
             </iframe>
         </div>
-<<<<<<< HEAD
         <button class="audio-button" onclick="window.open('https://e987d2133014d28cb1.gradio.live', '_blank')">Rain (AI Assistant)</button>
-=======
-        <button class="audio-button" onclick="window.open('https://www.123.gradio.com', '_blank')">Rain (AI Assistant)</button>
->>>>>>> 463ff7b6c9a6994d049909530966e6c498ab283b
     </section>
 
     <section class="content intro-section" id="about">
@@ -980,7 +1000,6 @@ model = ai.Model() >>
                 menu.classList.remove('active');
             }
         });
-<<<<<<< HEAD
     </script>
 
     <script src="https://w.soundcloud.com/player/api.js"></script>
@@ -1016,57 +1035,3 @@ model = ai.Model() >>
         });
     </script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-    </script>
-
-    <script src="https://w.soundcloud.com/player/api.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the iframe
-            const iframe = document.querySelector('.audio-container iframe');
-            const container = document.querySelector('.audio-container');
-            
-            // Initialize the SoundCloud Widget API
-            const widget = SC.Widget(iframe);
-            
-            widget.bind(SC.Widget.Events.READY, function() {
-                // Auto-play when ready
-                widget.play();
-                
-                // Add opacity when playing starts
-                widget.bind(SC.Widget.Events.PLAY, function() {
-                    container.classList.add('playing');
-                });
-
-                // Remove opacity when paused
-                widget.bind(SC.Widget.Events.PAUSE, function() {
-                    container.classList.remove('playing');
-                });
-            });
-        });
-    </script>
-</body>
->>>>>>> 463ff7b6c9a6994d049909530966e6c498ab283b
