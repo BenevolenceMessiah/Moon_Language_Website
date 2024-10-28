@@ -505,6 +505,10 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         .code-example::before {
@@ -520,7 +524,9 @@
             font-family: 'Fira Code', monospace;
             color: #e0e0e0;
             line-height: 1.6;
-            overflow-x: auto;
+            white-space: pre-wrap; /* Allows text to wrap */
+            word-break: break-word; /* Prevents overflow on mobile */
+            font-size: 0.9rem; /* Slightly smaller font on mobile */
         }
 
         .keyword { color: #569cd6; }
@@ -800,19 +806,50 @@
                 /* Increase padding for better readability on mobile */
                 padding: 0 1.5rem;
                 /* Adjust top margin for mobile */
-                margin-top: clamp(120px, 25vh, 200px);
-                /* Optionally reduce animation effects on mobile for better performance */
-                animation: glowText 3s ease-in-out infinite alternate;
+                margin-top: clamp(180px, 35vh, 250px);
             }
         }
 
         /* Add extra spacing for very narrow screens */
         @media (max-width: 480px) {
             .hero h1 {
-                /* Further increase margin for smaller screens */
-                margin-top: clamp(150px, 30vh, 250px);
-                /* Increase padding for better text wrapping */
+                /* Even more margin for the smallest screens */
+                margin-top: clamp(200px, 40vh, 300px);
                 padding: 0 2rem;
+            }
+        }
+
+        /* Add mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .code-example {
+                padding: 1rem;
+                margin: 1.5rem 0;
+                font-size: 0.85rem; /* Even smaller font for mobile */
+            }
+            
+            .code-block {
+                line-height: 1.4; /* Tighter line height on mobile */
+            }
+        }
+
+        /* Add horizontal scroll indicator for mobile */
+        .code-example::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, #1e1e1e);
+            pointer-events: none;
+            opacity: 0.8;
+            /* Only show on mobile */
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .code-example::after {
+                display: block;
             }
         }
     </style>
