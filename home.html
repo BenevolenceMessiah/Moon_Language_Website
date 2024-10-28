@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Moon Programming Language: The next generation programming language inspired by Python, built for high-performance computing, AI, and interoperability">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/moon_icon.ico">
+    <title>Moon Programming Language</title>
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #0d0d0d;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #f5f5f5;
+            margin: 0 1.5rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffba08;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('images/moon_bg.jpg') center/cover no-repeat;
+            animation: backgroundFade 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundFade {
+            0% {
+                filter: brightness(100%);
+            }
+
+            50% {
+                filter: brightness(70%);
+            }
+
+            100% {
+                filter: brightness(100%);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            text-align: center;
+            color: #ffba08;
+            animation: glowText 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            0% {
+                text-shadow: 0 0 10px #ffba08;
+            }
+
+            100% {
+                text-shadow: 0 0 20px #ffba08;
+            }
+        }
+
+        .audio-button {
+            margin-top: 2rem;
+            background-color: #ffba08;
+            color: #0d0d0d;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .audio-button:hover {
+            background-color: #e8a608;
+            transform: scale(1.1);
+        }
+
+        .content {
+            padding: 6rem 2rem;
+            margin-top: 8rem;
+        }
+
+        .intro-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            text-align: center;
+            line-height: 1.6;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            background-color: #222;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 186, 8, 0.6);
+        }
+
+        .feature h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .cta-section {
+            margin-top: 6rem;
+            text-align: center;
+            background: linear-gradient(to right, #1a1a1a, #333);
+            padding: 3rem;
+            border-radius: 10px;
+            animation: slideIn 2s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section button {
+            background-color: #ffba08;
+            color: #0d0d0d;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-section button:hover {
+            background-color: #e8a608;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .donation-section {
+            margin-top: 4rem;
+            text-align: center;
+            background-color: #222;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .donation-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .donation-section p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 40px;">
+            </div>
+            <div class="menu">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#get-started">Get Started</a>
+                <a href="#community">Community</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Welcome to Moon Programming Language 🌙</h1>
+        <button class="audio-button" onclick="playAudio()">Play "Amethyst Pocket (Part I)"</button>
+        <button class="audio-button" onclick="window.open('https://www.123.gradio.com', '_blank')">Rain (AI Assistant)</button>
+    </section>
+
+    <section class="content intro-section" id="about">
+        <h2>Why Moon?</h2>
+        <p>Moon is a new, open-source programming language inspired by Python but designed for high-performance computing, AI, and emerging technologies. With Moon, you can seamlessly mix and match resources from different languages, leverage cross-language dependencies, and access blazing-fast compiled execution, making it the perfect language for AI enthusiasts, scientists, and hobbyists alike.</p>
+    </section>
+
+    <section class="content features-section" id="features">
+        <div class="feature">
+            <h3>Python-Like Simplicity</h3>
+            <p>Moon adopts Python's developer-friendly syntax, making it accessible to both beginners and experienced developers while enhancing performance through strong typing and optimized memory control.</p>
+        </div>
+        <div class="feature">
+            <h3>High Performance for AI</h3>
+            <p>Moon is optimized for leveraging multi-core processors and hardware accelerators, making it efficient for machine learning, scientific computing, and AI model training.</p>
+        </div>
+        <div class="feature">
+            <h3>Seamless Integration</h3>
+            <p>Mix and match with other programming languages and repositories. Moon was built to be the ultimate connecting language, facilitating seamless interoperability for any modern project.</p>
+        </div>
+        <div class="feature">
+            <h3>Cultural Touch</h3>
+            <p>Moon uniquely incorporates Islamic-themed symbols, such as "﷽", adding a culturally relevant touch to programming while keeping it accessible to everyone.</p>
+        </div>
+    </section>
+
+    <section class="content cta-section" id="get-started">
+        <h2>Ready to Start Your Journey with Moon?</h2>
+        <p>Contribute to the development of Moon on GitHub, or download our latest release to get started.</p>
+        <button onclick="window.location.href='https://github.com/MichaelPisani/Moon';">Visit GitHub</button>
+        <button onclick="window.location.href='https://huggingface.co/BenevolenceMessiah';">HuggingFace Account</button>
+    </section>
+
+    <section class="content community-section" id="community">
+        <h2>Join the Moon Community</h2>
+        <p>Connect with like-minded developers and enthusiasts who are passionate about pushing the boundaries of modern technology with the Moon programming language. Collaborate, contribute, and be a part of the future.</p>
+        <div class="community-links">
+            <a href="https://github.com/MichaelPisani/Moon" target="_blank" class="community-button">GitHub</a>
+            <a href="https://discord.com/invite/example" target="_blank" class="community-button">Join Our Discord</a>
+        </div>
+    </section>
+
+    <section class="content donation-section" id="donations">
+        <h2>Support the Moon Programming Language Foundation</h2>
+        <p>If you'd like to support our work, consider donating. Your contributions help us keep Moon free, open-source, and accessible to everyone.</p>
+        <p><strong>PayPal:</strong> [PayPal Donation Link]</p>
+        <p><strong>Bitcoin Wallet:</strong> [Bitcoin Wallet Address]</p>
+        <p><strong>Ethereum Wallet:</strong> [Ethereum Wallet Address]</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Moon Programming Language Foundation | Created with Benevolence by Michael Pisani 🌙</p>
+    </footer>
+
+    <script>
+        // Simple animation for buttons
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach(button => {
+            button.addEventListener("mouseover", () => {
+                button.style.transform = "rotate(2deg)";
+            });
+            button.addEventListener("mouseout", () => {
+                button.style.transform = "rotate(0deg)";
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        const links = document.querySelectorAll("nav a");
+        links.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                const href = this.getAttribute("href");
+                document.querySelector(href).scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        });
+
+        // Play audio file
+        function playAudio() {
+            const audio = new Audio('audio/Benevolence_Messiah_-_Amethyst_Pocket_(Part I).flac');
+            audio.play();
+        }
+    </script>
+</body>
+
+</html>
