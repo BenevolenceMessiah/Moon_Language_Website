@@ -20,12 +20,14 @@
         }
 
         header {
-            background-color: #1a1a1a;
+            background-color: rgba(26, 26, 26, 0.95); /* Increased opacity */
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px); /* Added blur effect */
         }
 
         nav {
@@ -54,6 +56,9 @@
             height: 100vh;
             background: url('images/moon_bg.jpg') center/cover no-repeat;
             animation: backgroundFade 20s ease-in-out infinite alternate;
+            min-height: 100vh;
+            padding: 2rem;
+            box-sizing: border-box;
         }
 
         @keyframes backgroundFade {
@@ -71,10 +76,11 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 5vw, 4rem); /* Responsive font size */
             text-align: center;
             color: #ffba08;
             animation: glowText 3s ease-in-out infinite alternate;
+            padding: 0 1rem;
         }
 
         @keyframes glowText {
@@ -105,8 +111,10 @@
         }
 
         .content {
-            padding: 6rem 2rem;
-            margin-top: 8rem;
+            padding: 4rem 1rem;
+            margin-top: 6rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .intro-section {
@@ -237,6 +245,84 @@
             font-size: 1rem;
             margin-bottom: 1.5rem;
         }
+
+        /* Added responsive menu styles */
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgba(26, 26, 26, 0.9);
+                padding: 1rem;
+            }
+
+            .menu.active {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu a {
+                margin: 0.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+        }
+
+        /* Added container for better centering */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .audio-container {
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 186, 8, 0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .audio-container.playing {
+            opacity: 0.5;
+        }
+
+        .audio-container:hover {
+            opacity: 1 !important; /* Override playing state when hovered */
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 186, 8, 0.3);
+        }
+
+        .audio-container iframe {
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .audio-label {
+            color: #ffba08;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 186, 8, 0.5);
+        }
+
+        /* Make the audio player more responsive on mobile */
+        @media (max-width: 768px) {
+            .audio-container {
+                max-width: 90%;
+                margin: 1rem auto;
+            }
+        }
     </style>
 </head>
 
@@ -244,7 +330,12 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 96px;">
+                <img src="images/moon_logo.png" alt="Moon Programming Language Logo" style="height: 60px;"> <!-- Reduced logo size -->
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
             <div class="menu">
                 <a href="#home">Home</a>
@@ -258,7 +349,16 @@
 
     <section class="hero" id="home">
         <h1>Welcome to Moon Programming Language 🌙</h1>
-        <button class="audio-button" onclick="playAudio()">Play "Amethyst Pocket (Part I)"</button>
+        <div class="audio-container">
+            <div class="audio-label">🎵 Listen to "Amethyst Pocket (Part I)"</div>
+            <iframe width="300" 
+                    height="166" 
+                    scrolling="no" 
+                    frameborder="no" 
+                    allow="autoplay" 
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/amethyst-pocket-part-i-2&color=%23ffba08&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
+            </iframe>
+        </div>
         <button class="audio-button" onclick="window.open('https://www.123.gradio.com', '_blank')">Rain (AI Assistant)</button>
     </section>
 
@@ -339,10 +439,47 @@
             });
         });
 
-        // Play audio file
-        function playAudio() {
-            const audio = new Audio('./audio/Benevolence_Messiah_-_Amethyst_Pocket_(Part I).flac');
-            audio.play();
-        }
+        // Added mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the iframe
+            const iframe = document.querySelector('.audio-container iframe');
+            const container = document.querySelector('.audio-container');
+            
+            // Initialize the SoundCloud Widget API
+            const widget = SC.Widget(iframe);
+            
+            widget.bind(SC.Widget.Events.READY, function() {
+                // Auto-play when ready
+                widget.play();
+                
+                // Add opacity when playing starts
+                widget.bind(SC.Widget.Events.PLAY, function() {
+                    container.classList.add('playing');
+                });
+
+                // Remove opacity when paused
+                widget.bind(SC.Widget.Events.PAUSE, function() {
+                    container.classList.remove('playing');
+                });
+            });
+        });
     </script>
 </body>
