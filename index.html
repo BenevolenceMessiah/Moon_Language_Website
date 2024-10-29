@@ -909,6 +909,41 @@
                 display: block;
             }
         }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .theme-button {
+            padding: 8px 16px;
+            border: 2px solid #ffba08;
+            background: transparent;
+            color: #ffba08;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-button.active {
+            background: #ffba08;
+            color: #1f1f1f;
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                bottom: 20px;
+                left: 20px;
+            }
+        }
     </style>
     <meta property="og:title" content="Moon Programming Language">
     <meta property="og:description" content="The next generation programming language inspired by Python, built for high-performance computing, AI, and interoperability">
@@ -1164,5 +1199,20 @@ model = ai.Model() >>
                 });
             });
         });
+    </script>
+
+    <div class="theme-toggle">
+        <button onclick="switchTheme('classic')" class="theme-button active" id="classicTheme">Classic</button>
+        <button onclick="switchTheme('vaporwave')" class="theme-button" id="vaporwaveTheme">Vaporwave</button>
+    </div>
+
+    <script>
+        function switchTheme(theme) {
+            if (theme === 'vaporwave') {
+                window.location.href = 'index-vaporwave.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
     </script>
 </body>
