@@ -83,7 +83,8 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .hero > * {
@@ -329,6 +330,8 @@
             background-color: #222;
             padding: 2rem;
             border-radius: 10px;
+            position: relative;
+            z-index: 10;
         }
 
         .donation-section h2 {
@@ -338,7 +341,7 @@
 
         .donation-section p {
             font-size: 1rem;
-            margin-bottom: 1.5rem;
+            margin: 1rem 0;
         }
 
         /* Added responsive menu styles */
@@ -377,7 +380,10 @@
         }
 
         .audio-container {
-            margin: 2rem 0;
+            position: relative;
+            z-index: 1000;
+            pointer-events: all;
+            margin: 2rem auto;
             width: 100%;
             max-width: 500px;
             background: rgba(0, 0, 0, 0.2);
@@ -398,8 +404,11 @@
         }
 
         .audio-container iframe {
-            border-radius: 8px;
-            width: 100%;
+            position: relative;
+            z-index: 1001;
+            pointer-events: all;
+            width: 100% !important;
+            height: 166px !important;
         }
 
         .audio-label {
@@ -977,14 +986,16 @@
 
     <section class="hero" id="home">
         <h1>Welcome to Moon Programming Language 🌙</h1>
-        <div class="audio-container">
+        <div class="audio-container" style="position: relative; z-index: 100;">
             <div class="audio-label">🎵 Listen to "Amethyst Pocket (Part I)"</div>
-            <iframe width="300" 
-                    height="166" 
-                    scrolling="no" 
-                    frameborder="no" 
-                    allow="autoplay" 
-                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/amethyst-pocket-part-i-2&color=%23ffba08&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
+            <iframe 
+                width="300" 
+                height="166" 
+                scrolling="no" 
+                frameborder="no" 
+                allow="autoplay"
+                style="position: relative; z-index: 10; pointer-events: auto;"
+                src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/amethyst-pocket-part-i-2&color=%23ffba08&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
             </iframe>
         </div>
         <button class="audio-button" onclick="window.open('https://e987d2133014d28cb1.gradio.live', '_blank')">Rain (AI Assistant)</button>
@@ -1062,8 +1073,8 @@
         <h2>Support the Moon Programming Language Foundation</h2>
         <p>If you'd like to support our work, consider donating. Your contributions help us keep Moon free, open-source, and accessible to everyone.</p>
         <p><strong>PayPal:</strong> [PayPal Donation Link]</p>
-        <p><strong>Bitcoin Wallet:</strong> [Bitcoin Wallet Address]</p>
-        <p><strong>Ethereum Wallet:</strong> [Ethereum Wallet Address]</p>
+        <p><strong>Bitcoin Wallet:</strong> bc1q4fwzcfpcm0s6pda7grt3w9a6hqyyxrzf68thcf</p>
+        <p><strong>Ethereum Wallet:</strong> 0x775b3Ba958ceA83Ed567BAe6eC136e121877508D</p>
     </section>
 
     <section class="content code-examples" id="examples">
@@ -1090,6 +1101,12 @@ model = ai.Model() >>
     <footer>
         <p>&copy; 2024 Moon Programming Language Foundation | Created with Love by Michael Pisani, and lots of AI! 🌙</p>
     </footer>
+
+    <div class="bio-container">
+        <a href="web_pages/biography.html" class="bio-button">
+            Learn More About Michael Pisani
+        </a>
+    </div>
 
     <script>
         // Simple animation for buttons
@@ -1214,5 +1231,10 @@ model = ai.Model() >>
                 window.location.href = 'index.html';
             }
         }
+    </script>
+
+    <script src="js/content-manager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadContent);
     </script>
 </body>

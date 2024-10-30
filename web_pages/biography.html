@@ -18,6 +18,9 @@
             color: white;
             perspective: 1000px;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
         }
 
         /* Lava Lamp Background */
@@ -416,79 +419,211 @@
                 font-size: 0.8rem;
             }
         }
+
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+
+        .skill-category-title {
+            color: #ff1493;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            text-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+        }
+
+        .category-bar {
+            height: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .skill-subcategories {
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255, 20, 147, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .skill-category-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Social Buttons Container */
+        .social-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-buttons .neon-button {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .social-buttons {
+                gap: 0.5rem;
+            }
+            
+            .social-buttons .neon-button {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .audio-container {
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .audio-container iframe {
+                width: 100% !important;
+            }
+            
+            .bio-card {
+                width: 85%;
+                padding: 2rem;
+            }
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.3/umd/index.min.js"></script>
 </head>
 <body>
     <div class="lava-lamp"></div>
     <div class="pulse-lights"></div>
     <div class="floating-particles" id="particles"></div>
 
+    <!-- Add SoundCloud Player -->
+    <div class="audio-container" style="position: relative; z-index: 100; width: 300px; margin: 2rem auto; text-align: center;">
+        <div class="audio-label">🎵 Listen to "5AM (Benevolence Messiah Magenta Cut in A=432Hz)"</div>
+        <iframe 
+            width="300" 
+            height="166" 
+            scrolling="no" 
+            frameborder="no" 
+            allow="autoplay"
+            style="position: relative; z-index: 10; pointer-events: auto;"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/5am-benevolence-messiah-1&color=%23ff00ff&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
+        </iframe>
+    </div>
+
     <!-- Enlarged Biography Card with Complex Neon and Motion Effects -->
-    <div class="bio-card">
-        <h1 class="glowing-text" data-text="Benevolence Messiah">Benevolence Messiah</h1>
+    <div class="bio-card" style="margin-top: 4rem;">
+        <h1 class="glowing-text" data-text="Michael Pisani/Benevolence Messiah">Michael Pisani/Benevolence Messiah</h1>
         <p class="scroll-animation">
-            Benevolence Messiah is a Maltese-Irish polymath born in Detroit, Michigan, known for his extensive knowledge and expertise in a multitude 
-            of disciplines. Trained in the art of political and geographical analysis, comparative geopolitical economy, and dialectical analysis, Benevolence Messiah has made inroads in the burgeoning fields of music
+            Michael Pisani, also known as Benevolence Messiah, is a Maltese-Irish polymath born in Detroit, Michigan, known for his extensive knowledge and expertise in a multitude 
+            of disciplines. Trained in the art of political and geographical analysis, comparative geopolitical economy, and dialectical analysis, he has made inroads in the burgeoning fields of music
             art, and technology. As a musician and artist, his work is characterized by a unique blend of genres and extensive experimentation. Benevolence Messiah's discography, comprised of nearly 800 tracks, 
             totaling 1.5TB of data. His musical projects span a wide range of genres such as Psydub, LoFi, Triphop, Aramaic, and more, all united by an overarching psychedelic theme that transcends traditional boundaries.
             In addition to his musical pursuits, Benevolence Messiah is a visual artist, proficient in 3D and 2D modeling, animations, AI visual, video, and image generation art, Snapchat lenses, AR art, and 
             multi-sensory art. He has developed several AI web UI AI inferences for the democratization of AI and hosts around 100 repositories, web apps/spaces, and AI projects on GitHub and HuggingFace.
         </p>
         <p class="scroll-animation">
-            Benevolence Messiah's work as a political philosopher is equally impressive. He is well-versed in various forms of Comparative government and economics.
+            Pisani's work as a political philosopher is equally impressive. He is well-versed in various forms of Comparative government and economics.
         </p>
         <p class="scroll-animation">
-            <strong class="interactive-element">Achievements:</strong> Multiple art exhibits, international music releases, and collaborations with forward-thinking artists and thinkers in the digital art space, AI/GitHub/HuggingFace Repositories, and web apps.
+            <strong class="interactive-element">Achievements:</strong> Creation of the Moon Programming Language, Multiple art exhibits, international music releases, global collaborations with forward-thinking artists and thinkers in the digital art space, AI/GitHub/HuggingFace Repositories, and web apps.
         </p>
 
         <div class="skills scroll-animation">
             <h2 class="glowing-text" data-text="Skills">Skills</h2>
-            <div class="skill">
-                <div class="skill-name">HTML/CSS/JavaScript</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 35%;"></div>
+            
+            <!-- Programming Section -->
+            <div class="skill-category">
+                <h3 class="skill-category-title">Programming</h3>
+                <div class="skill-bar category-bar">
+                    <div class="skill-progress" style="--skill-level: 33.47%;"></div>
                 </div>
-            </div>
-            <div class="skill">
-                <div class="skill-name">Python</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 55%;"></div>
-                </div>
-            </div>
+                <div class="skill-subcategories">
+                    <div class="skill">
+                        <div class="skill-name">HTML/CSS/JavaScript</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 29%;"></div>
                         </div>
-            <div class="skill">
-                <div class="skill-name">Batchfile/Shellscript</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 75%;"></div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Python</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Batchfile/Shellscript</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 65%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Ruby, Rust, C++, Node.js</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 20%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">MoonScript</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 8.333%;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="skill">
-                <div class="skill-name">Ruby, Rust, C++, Node.js</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 20%;"></div>
+
+            <!-- Artistry Section -->
+            <div class="skill-category">
+                <h3 class="skill-category-title">Artistry</h3>
+                <div class="skill-bar category-bar">
+                    <div class="skill-progress" style="--skill-level: 86%;"></div>
                 </div>
-            </div>            
-            <div class="skill">
-                <div class="skill-name">Music Production, Audio Mastering, Recording Engineering, Mix Engineering</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 95%;"></div>
+                <div class="skill-subcategories">
+                    <div class="skill">
+                        <div class="skill-name">Music Production, Song/Lyric Writing, Composition/Arrangement, Instrumentation, Record/Executive Production, Sound Design/Synthesis, Audio Mastering, Recording Engineering, Mix Engineering</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Visual Art 2D/3D Animation, VR/AR, Multisensory Art, Snapchat Lenses, Generative AI Art</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 77%;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="skill">
-                <div class="skill-name">Visual Art 2D/3D Animation, VR/AR, Multisensory, Snapchat Lenses, Generative AI</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 80%;"></div>
+
+            <!-- Socio-economic Disciplines Section -->
+            <div class="skill-category">
+                <h3 class="skill-category-title">Socio-economic Disciplines</h3>
+                <div class="skill-bar category-bar">
+                    <div class="skill-progress" style="--skill-level: 68%;"></div>
                 </div>
-            </div>    
-            <div class="skill">
-                <div class="skill-name">Banking, Loan-origination, Islamic Finance</div>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--skill-level: 70%;"></div>
+                <div class="skill-subcategories">
+                    <div class="skill">
+                        <div class="skill-name">Banking, Loan-origination, Islamic Finance</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Political Science, Dialectical/Historical Materialism, Geo-political Economy, World History, Comparative Religion, Fiqh</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--skill-level: 91%;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button class="neon-button scroll-animation" onclick="window.location.href='mailto:benevolence.messiah@gmail.com'">Contact Me</button>
+        <!-- Social Media Buttons Container -->
+        <div class="social-buttons scroll-animation">
+            <button class="neon-button" onclick="window.location.href='mailto:benevolence.messiah@gmail.com'">Contact Me</button>
+            <button class="neon-button" onclick="window.location.href='https://huggingface.co/BenevolenceMessiah'">HuggingFace</button>
+            <button class="neon-button" onclick="window.location.href='https://github.com/BenevolenceMessiah'">GitHub</button>
+            <button class="neon-button" onclick="window.location.href='https://www.instagram.com/benevolence_messiah/'">Instagram</button>
+            <button class="neon-button" onclick="window.location.href='https://soundcloud.com/benevolence-messiah'">SoundCloud</button>
+        </div>
     </div>
 
     <script>
@@ -574,6 +709,31 @@
                 const shadowY = (y - centerY) / 10;
                 text.style.textShadow = `${shadowX}px ${shadowY}px 8px rgba(255,20,147,0.8)`;
             });
+        });
+    </script>
+
+    <!-- Add SoundCloud API and player initialization -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('.audio-container iframe');
+            const container = document.querySelector('.audio-container');
+            
+            try {
+                const widget = SC.Widget(iframe);
+                
+                widget.bind(SC.Widget.Events.READY, function() {
+                    widget.play();
+                });
+
+                widget.bind(SC.Widget.Events.ERROR, function() {
+                    console.error('SoundCloud player error');
+                    container.innerHTML = '<p>Audio player temporarily unavailable</p>';
+                });
+            } catch (error) {
+                console.error('SoundCloud initialization error:', error);
+                container.innerHTML = '<p>Audio player temporarily unavailable</p>';
+            }
         });
     </script>
 </body>
