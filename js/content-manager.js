@@ -118,7 +118,7 @@ model = ai.Model() >>
     },
     rainAI: {
         buttonText: "Rain (AI Assistant)",
-        url: "https://e987d2133014d28cb1.gradio.live"
+        url: "https://18846255d91bdd16c1.gradio.live"
     },
     footer: {
         copyright: "© 2024 Moon Programming Language Foundation | Created with Love by Michael Pisani, and lots of AI! 🌙"
@@ -154,7 +154,7 @@ function loadContent() {
     }
 
     // Rain AI button
-    const rainButton = document.querySelector('.audio-button');
+    const rainButton = document.querySelector('.audio-button, .rain-ai-button');
     if (rainButton) {
         rainButton.textContent = siteContent.rainAI.buttonText;
         rainButton.onclick = () => window.open(siteContent.rainAI.url, '_blank');

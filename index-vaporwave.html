@@ -64,15 +64,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: url('images/moon_bg.jpg') center/cover no-repeat;
-            animation: backgroundFade 20s ease-in-out infinite alternate;
+            justify-content: flex-start;
             min-height: 100vh;
-            padding: 2rem;
-            box-sizing: border-box;
+            width: 100%;
             position: relative;
-            background-attachment: fixed;
+            padding-top: 80px; /* Add space for header */
+            z-index: 1;
         }
 
         .hero::before {
@@ -83,7 +80,7 @@
             width: 100%;
             height: 100%;
             background: url('images/moon_background.svg') center/cover no-repeat;
-            transform: scale(4);
+            transform: scale(8);
             animation: zoomBackground 60s linear infinite;
             z-index: -1;
             pointer-events: none;
@@ -329,7 +326,7 @@
         .donation-section {
             margin-top: 4rem;
             text-align: center;
-            background: linear-gradient(45deg, rgba(18, 4, 88, 0.8), rgba(77, 15, 140, 0.8));
+            background: rgba(0, 0, 0, 0.5);
             padding: 2rem;
             border-radius: 10px;
             position: relative;
@@ -383,11 +380,11 @@
         }
 
         .audio-container {
-            position: relative;
-            z-index: 1000;
-            pointer-events: all;
+            width: 100%;
+            max-width: 500px;
             margin: 2rem auto;
-            background: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
         }
 
         .audio-container.playing {
@@ -961,8 +958,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 200%;
-            height: 200%;
+            width: 100%;
+            height: 100%;
             background: url('images/moon_background.svg') center/cover no-repeat;
             transform: translate(-50%, -50%) scale(2);
             animation: zoomBackground 120s linear infinite;
@@ -974,7 +971,7 @@
                 transform: translate(-50%, -50%) scale(2);
             }
             50% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(1.5);
             }
             100% {
                 transform: translate(-50%, -50%) scale(2);
@@ -1069,66 +1066,299 @@
 
         /* Enhanced Rain AI button */
         .rain-ai-button {
-            background: linear-gradient(45deg, #ff00ff, #00ffff);
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-            transform: scale(1.1);
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
             padding: 1.2rem 2.5rem;
-            font-size: 1.3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1002; /* Increase z-index to ensure visibility */
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+
+        .rain-ai-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+        }
+
+        /* Bio button styling */
+        .bio-container {
+            text-align: center;
+            margin: 4rem auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bio-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+        }
+
+        .bio-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .rain-ai-button,
+            .bio-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 80%;
+                max-width: 300px;
+                margin: 1.5rem auto;
+            }
+
+            .bio-container {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+        }
+
+        /* Update the mobile media query */
+        @media (max-width: 768px) {
+            .hero h1 {
+                /* Remove glow effect on mobile for vaporwave theme */
+                animation: none;
+                text-shadow: 2px 2px var(--secondary-color);
+            }
+        }
+
+        /* Update hero section background */
+        .hero {
+            background: none; /* Remove the blue background */
+            position: relative;
+        }
+
+        .audio-button {
+            position: relative;
+            z-index: 1000; /* Ensure button stays above other elements */
+            margin: 2rem auto;
+            display: block; /* Make button visible */
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+        }
+
+        /* Remove any remaining background colors */
+        body {
+            background: none;
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+            color: var(--text-color);
+        }
+
+        /* Update hero and its background */
+        .hero {
+            background: none;
+            min-height: 100vh;
+            width: 100%;
             position: relative;
             overflow: hidden;
         }
 
-        .rain-ai-button::before {
+        /* Enhance the SVG background to fill all space */
+        .hero::before {
             content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 255, 255, 0.4),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shimmerRain 3s infinite;
+            position: fixed; /* Change to fixed to cover entire viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/moon_background.svg') center/cover no-repeat;
+            transform: scale(4);
+            animation: zoomBackground 60s linear infinite;
+            z-index: -1;
+            pointer-events: none;
         }
 
-        /* Enhanced Discord button */
-        .discord-button {
-            background: #5865F2;
-            border: none;
-            padding: 1rem 2rem;
-            color: white;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-            transition: all 0.3s ease;
+        /* Remove any background colors from sections */
+        .content {
+            background: none;
+            position: relative;
+            z-index: 1;
         }
 
-        .discord-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(88, 101, 242, 0.7);
+        .feature {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(10px);
         }
 
-        /* Bio button styling */
-        .bio-button {
-            display: inline-block;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
+        .cta-section {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Remove the background gradient definition */
+        :root {
+            --primary-color: #ff00ff;
+            --secondary-color: #00ffff;
+            --text-color: #ffffff;
+            /* Remove --bg-color if it's not needed */
+        }
+
+        /* Remove any other background definitions */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #f5f5f5;
+                --accent-color: #ffba08;
+            }
+        }
+
+        /* Restore the gradient background but add a wrapper for the SVG overlay */
+        body {
             background: linear-gradient(45deg, #120458, #4d0f8c);
-            border: 1px solid var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+            color: var(--text-color);
+            position: relative;
         }
 
-        .bio-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3);
+        /* Add a full-page wrapper for the SVG background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 200vw; /* Make wider than viewport */
+            height: 200vh; /* Make taller than viewport */
+            background: url('images/moon_background.svg') center/cover no-repeat;
+            transform: translate(-50%, -50%) scale(2);
+            animation: zoomBackground 120s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Update the animation for smoother zoom effect */
+        @keyframes zoomBackground {
+            0% {
+                transform: translate(-50%, -50%) scale(2);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        /* Ensure all content appears above the background */
+        header,
+        .hero,
+        .content,
+        .footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Update hero section to work with the new background */
+        .hero {
+            background: none;
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* Remove the hero's separate background */
+        .hero::before {
+            display: none;
+        }
+
+        /* Adjust for mobile */
+        @media (max-width: 768px) {
+            body::before {
+                width: 300vw; /* Even wider on mobile */
+                height: 300vh;
+                transform: translate(-50%, -50%) scale(3);
+            }
+
+            @keyframes zoomBackground {
+                0% {
+                    transform: translate(-50%, -50%) scale(3);
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(2);
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(3);
+                }
+            }
+        }
+
+        /* Update audio container to not block other elements */
+        .audio-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Remove any potential overlays that might be blocking the button */
+        .hero::before,
+        .hero::after {
+            pointer-events: none;
+        }
+
+        /* Add this to the style section */
+        .community-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .community-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .community-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .community-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .community-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 80%;
+                max-width: 300px;
+                text-align: center;
+            }
         }
     </style>
     <meta property="og:title" content="Moon Programming Language">
@@ -1163,7 +1393,7 @@
 
     <section class="hero" id="home">
         <h1>Welcome to Moon Programming Language 🌙</h1>
-        <div class="audio-container" style="position: relative; z-index: 100;">
+        <div class="audio-container">
             <div class="audio-label">🎵 Listen to "Hill Tops (Benevolence Messiah Remix)"</div>
             <iframe 
                 width="300" 
@@ -1175,7 +1405,7 @@
                 src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/benevolence-messiah/hill-tops-benevolence-messiah&color=%23ff00ff&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
             </iframe>
         </div>
-        <button class="audio-button" onclick="window.open('https://e987d2133014d28cb1.gradio.live', '_blank')">Rain (AI Assistant)</button>
+        <button class="rain-ai-button" onclick="window.open('https://18846255d91bdd16c1.gradio.live', '_blank')">Rain (AI Assistant)</button>
     </section>
 
     <section class="content intro-section" id="about">
@@ -1275,15 +1505,15 @@ model = ai.Model() >>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Moon Programming Language Foundation | Created with Love by Michael Pisani, and lots of AI! 🌙</p>
-    </footer>
-
-    <div class="bio-container">
+    <div class="bio-container" style="text-align: center; margin: 4rem auto; position: relative; z-index: 10;">
         <a href="web_pages/biography.html" class="bio-button">
             Learn More About Michael Pisani
         </a>
     </div>
+
+    <footer>
+        <p>&copy; 2024 Moon Programming Language Foundation | Created with Love by Michael Pisani, and lots of AI! 🌙</p>
+    </footer>
 
     <script>
         // Simple animation for buttons

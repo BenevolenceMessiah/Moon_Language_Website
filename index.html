@@ -953,6 +953,108 @@
                 left: 20px;
             }
         }
+
+        /* Update the mobile media query */
+        @media (max-width: 768px) {
+            .hero h1 {
+                /* Keep the glow effect on mobile for classic theme */
+                animation: glowText 3s ease-in-out infinite alternate,
+                          floatEffect 6s ease-in-out infinite,
+                          rainbowGlow 8s linear infinite;
+            }
+        }
+
+        .bio-container {
+            text-align: center;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bio-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(45deg, #ffba08, #ffd000);
+            color: #0d0d0d;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 186, 8, 0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .bio-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 186, 8, 0.4);
+            background: linear-gradient(45deg, #ffd000, #ffba08);
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .bio-container {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+            
+            .bio-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 80%;
+                max-width: 300px;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+
+        /* Add this to the style */
+        .community-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .community-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(45deg, #ffba08, #ffd000);
+            color: #0d0d0d;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 186, 8, 0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .community-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 186, 8, 0.4);
+            background: linear-gradient(45deg, #ffd000, #ffba08);
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .community-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .community-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 80%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
     </style>
     <meta property="og:title" content="Moon Programming Language">
     <meta property="og:description" content="The next generation programming language inspired by Python, built for high-performance computing, AI, and interoperability">
