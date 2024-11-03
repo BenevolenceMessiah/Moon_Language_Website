@@ -118,7 +118,7 @@ model = ai.Model() >>
     },
     rainAI: {
         buttonText: "Rain (AI Assistant)",
-        url: "https://18846255d91bdd16c1.gradio.live"
+        url: "https://997b10d595f41c8ab0.gradio.live/"
     },
     footer: {
         copyright: "© 2024 Moon Programming Language Foundation | Created with Love by Michael Pisani, and lots of AI! 🌙"
